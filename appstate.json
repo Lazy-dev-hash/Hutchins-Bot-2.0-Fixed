@@ -5,8 +5,8 @@
         "domain": "facebook.com",
         "path": "/",
         "hostOnly": false,
-        "creation": "2024-12-09T14:18:24.126Z",
-        "lastAccessed": "2024-12-09T14:18:24.127Z"
+        "creation": "2024-12-09T15:01:03.450Z",
+        "lastAccessed": "2024-12-09T15:01:03.451Z"
     },
     {
         "key": "vpd",
@@ -14,8 +14,8 @@
         "domain": "facebook.com",
         "path": "/",
         "hostOnly": false,
-        "creation": "2024-12-09T14:18:24.128Z",
-        "lastAccessed": "2024-12-09T14:18:24.128Z"
+        "creation": "2024-12-09T15:01:03.451Z",
+        "lastAccessed": "2024-12-09T15:01:03.451Z"
     },
     {
         "key": "wd",
@@ -23,25 +23,25 @@
         "domain": "facebook.com",
         "path": "/",
         "hostOnly": false,
-        "creation": "2024-12-09T14:18:24.128Z",
-        "lastAccessed": "2024-12-09T14:18:24.128Z"
+        "creation": "2024-12-09T15:01:03.451Z",
+        "lastAccessed": "2024-12-09T15:01:03.451Z"
     },
     {
         "key": "wl_cbv",
-        "value": "v2%3Bclient_version%3A2691%3Btimestamp%3A1733753897",
+        "value": "v2%3Bclient_version%3A2691%3Btimestamp%3A1733756455",
         "domain": "facebook.com",
         "path": "/",
         "hostOnly": false,
-        "creation": "2024-12-09T14:18:24.128Z",
-        "lastAccessed": "2024-12-09T14:18:24.128Z"
+        "creation": "2024-12-09T15:01:03.451Z",
+        "lastAccessed": "2024-12-09T15:01:03.451Z"
     },
     {
         "key": "fbl_st",
-        "value": "101424344%3BT%3A28895898",
+        "value": "101435195%3BT%3A28895940",
         "domain": "facebook.com",
         "path": "/",
         "hostOnly": false,
-        "creation": "2024-12-09T14:18:24.128Z",
-        "lastAccessed": "2024-12-09T14:18:24.128Z"
+        "creation": "2024-12-09T15:01:03.451Z",
+        "lastAccessed": "2024-12-09T15:01:03.451Z"
     }
-]paste your Appstate 
+]
