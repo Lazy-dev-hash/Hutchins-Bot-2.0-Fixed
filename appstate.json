@@ -1,1 +1,47 @@
-paste your Appstate 
+[
+    {
+        "key": "datr",
+        "value": "PBdVZ_EwXwlakx9KbVdwC6hz",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-12-09T14:18:24.126Z",
+        "lastAccessed": "2024-12-09T14:18:24.127Z"
+    },
+    {
+        "key": "vpd",
+        "value": "v1%3B669x371x1.943750023841858",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-12-09T14:18:24.128Z",
+        "lastAccessed": "2024-12-09T14:18:24.128Z"
+    },
+    {
+        "key": "wd",
+        "value": "371x669",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-12-09T14:18:24.128Z",
+        "lastAccessed": "2024-12-09T14:18:24.128Z"
+    },
+    {
+        "key": "wl_cbv",
+        "value": "v2%3Bclient_version%3A2691%3Btimestamp%3A1733753897",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-12-09T14:18:24.128Z",
+        "lastAccessed": "2024-12-09T14:18:24.128Z"
+    },
+    {
+        "key": "fbl_st",
+        "value": "101424344%3BT%3A28895898",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-12-09T14:18:24.128Z",
+        "lastAccessed": "2024-12-09T14:18:24.128Z"
+    }
+]paste your Appstate 
