@@ -1,16 +1,16 @@
 {
   "prefix": "-",
   "adminUIDs": [
-   "100045349402519"
+   "100071157053751"
   ],
   "moderatorUIDs": [
-    "your uid",
+    "100071157053751",
     "",
     ""
   ],
-  "botName": "Edsel Ai",
-  "ownerName": "Edsel Paculanang",
-  "facebookLink": "https://www.facebook.com/edselpaculanang.26",
+  "botName": "coffe",
+  "ownerName": "Sunnel",
+  "facebookLink": "https://www.facebook.com/sunnel.johnrebano37",
   "resend": false,
   "notilogs": true,
   "appstate": "./appstate.json",
@@ -18,8 +18,8 @@
   "restartTime": 50,
   "FCA": "hut-chat-api",
   "loginpanel": {
-    "user": "your username in dashboard",
-    "password": "password your dashboard",
+    "user": "nelzy",
+    "password": "rebano",
     "passcode": "12345"
   }
 }
