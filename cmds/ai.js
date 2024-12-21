@@ -4,13 +4,12 @@ const https = require('https');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const apiKeys = [
-  "AIzaSyBAEiDoFt0no4m_rvuWnAdqj8TzPPSoESs",
-  "AIzaSyAgZgBukaiCxWlm-P7zo9tmOM9499BsJp4",
-  "AIzaSyArWBkp8T1izTH5Gfbgk5DFfBILkwoBAnc",
-  "AIzaSyDDI6Uaond8rN4o4-iDOwKeWEaqq_Srl3Q",
-  "AIzaSyDOYoqSMxnoL-JtCdtOWhfaS6swm2xC7TA"
+ "AIzaSyBAEiDoFt0no4m_rvuWnAdqj8TzPPSoESs",
+ "AIzaSyAgZgBukaiCxWlm-P7zo9tmOM9499BsJp4",
+ "AIzaSyArWBkp8T1izTH5Gfbgk5DFfBILkwoBAnc",
+ "AIzaSyDDI6Uaond8rN4o4-iDOwKeWEaqq_Srl3Q",
+ "AIzaSyDOYoqSMxnoL-JtCdtOWhfaS6swm2xC7TA",
 ];
-
 const API_KEY = apiKeys[Math.floor(Math.random() * apiKeys.length)];
 
 if (!API_KEY) {
@@ -34,6 +33,18 @@ function convertToBold(text) {
     .replace(/### (.*?)(\n|$)/g, (match, p1) => `${[...p1].map(char => fontMapping[char] || char).join('')}`);
 }
 
+function getFormattedDate() {
+  const now = new Date();
+  return new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  }).format(now);
+}
+
 module.exports = {
   name: "ai",
   usedby: 0,
@@ -49,11 +60,14 @@ module.exports = {
     const followUpApiUrl = `https://ccprojectapis.ddns.net/api/gptconvo?ask=${encodeURIComponent(reply)}&id=${senderID}`;
     api.setMessageReaction("⏱️", event.messageID, () => {}, true);
 
+    const startTime = Date.now(); // Start time
     try {
       const response = await axios.get(followUpApiUrl);
       const followUpResult = convertToBold(response.data.response);
+      const responseTime = Date.now() - startTime; // Calculate response time
+      const date = getFormattedDate(); // Get current date and time
       api.setMessageReaction("✅", event.messageID, () => {}, true);
-      api.sendMessage(`${followUpResult}`, threadID, event.messageID);
+      api.sendMessage(`📅 ${date}\n⏱️ Response time: ${responseTime} ms\n\n${followUpResult}`, threadID, event.messageID);
     } catch (error) {
       api.sendMessage(error.message, threadID);
     }
@@ -70,49 +84,13 @@ module.exports = {
     const apiUrl = `https://ccprojectapis.ddns.net/api/gptconvo?ask=${encodeURIComponent(target.join(" "))}&id=${id}`;
     const lad = await actions.reply("🔎 Searching for an answer. Please wait...", threadID, messageID);
 
+    const startTime = Date.now(); // Start time
     try {
-      if (event.type === "message_reply" && event.messageReply.attachments && event.messageReply.attachments[0]) {
-        const attachment = event.messageReply.attachments[0];
-
-        if (attachment.type === "photo") {
-          const imageURL = attachment.url;
-          const imagePath = `./downloadedImage.jpg`;
-          const file = fs.createWriteStream(imagePath);
-
-          https.get(imageURL, (response) => {
-            response.pipe(file);
-
-            file.on('finish', async () => {
-              const genAI = new GoogleGenerativeAI(API_KEY);
-              const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-              try {
-                const image = {
-                  inlineData: {
-                    data: Buffer.from(fs.readFileSync(imagePath)).toString("base64"),
-                    mimeType: "image/png",
-                  },
-                };
-
-                const result = await model.generateContent([target.join(" "), image]);
-                const vision = convertToBold(result.response.text());
-
-                if (vision) {
-                  api.editMessage(`𝗚𝗲𝗺𝗶𝗻𝗶 𝗩𝗶𝘀𝗶𝗼𝗻 𝗜𝗺𝗮𝗴𝗲 𝗥𝗲𝗰𝗼𝗴𝗻𝗶𝘁𝗶𝗼𝗻\n━━━━━━━━━━━━━━━━━━\n${vision}\n━━━━━━━━━━━━━━━━━━\n`, lad.messageID, event.threadID, messageID);
-                } else {
-                  api.sendMessage("🤖 Failed to recognize the image.", threadID, messageID);
-                }
-              } catch (error) {
-                api.sendMessage("Error during image recognition.", threadID);
-              }
-            });
-          });
-        }
-      } else {
-        const response = await axios.get(apiUrl);
-        const result = convertToBold(response.data.response);
-        api.editMessage(`${result}`, lad.messageID, event.threadID, messageID);
-      }
+      const response = await axios.get(apiUrl);
+      const result = convertToBold(response.data.response);
+      const responseTime = Date.now() - startTime; // Calculate response time
+      const date = getFormattedDate(); // Get current date and time
+      api.editMessage(`📅 ${date}\n⏱️ Response time: ${responseTime} ms\n\n${result}`, lad.messageID, event.threadID, messageID);
 
       global.client.onReply.push({
         name: this.name,
@@ -120,7 +98,7 @@ module.exports = {
         author: event.senderID,
       });
     } catch (error) {
-      api.editMessage(`❌ | ${error.message} Just use ai2 command or recommand again`, lad.messageID, threadID, messageID);
+      api.editMessage(`❌ | ${error.message}`, lad.messageID, threadID, messageID);
     }
   }
 };
