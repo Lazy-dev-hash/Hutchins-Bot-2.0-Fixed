@@ -1,4 +1,4 @@
-can you add response time const axios = require('axios');
+const axios = require('axios');
 const fs = require('fs');
 const https = require('https');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
