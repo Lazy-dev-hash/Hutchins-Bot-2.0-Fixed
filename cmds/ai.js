@@ -8,8 +8,7 @@ const apiKeys = [
   "AIzaSyAgZgBukaiCxWlm-P7zo9tmOM9499BsJp4",
   "AIzaSyArWBkp8T1izTH5Gfbgk5DFfBILkwoBAnc",
   "AIzaSyDDI6Uaond8rN4o4-iDOwKeWEaqq_Srl3Q",
-  "AIzaSyDOYoqSMxnoL-JtCdtOWhfaS6swm2xC7TA",
-  "AIzaSyAemg5ehyhLdEQFROK9PV3jBZScsC7Onp0",
+  "AIzaSyDOYoqSMxnoL-JtCdtOWhfaS6swm2xC7TA"
 ];
 
 const API_KEY = apiKeys[Math.floor(Math.random() * apiKeys.length)];
