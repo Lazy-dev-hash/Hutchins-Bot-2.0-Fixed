@@ -86,8 +86,12 @@ module.exports = {
   },
 
   onLaunch: async function ({ event, actions, target, api }) {
-    const { messageID, threadID } = event;
-    const id = event.senderID;
+    const { messageID, threadID, senderID } = event;
+    const id = senderID;
+
+    // Get username or display name (if available)
+    const userProfile = await api.getUserInfo(senderID);
+    const username = userProfile[senderID]?.name || 'User';  // If no name, fallback to 'User'
 
     if (!target[0]) {
       return api.sendMessage("Please provide your question.\n\nExample: ai what is the solar system?", threadID, messageID);
@@ -106,7 +110,9 @@ module.exports = {
 
       const result = convertToBold(response.response.text());
 
-      api.editMessage(`${result}`, lad.messageID, event.threadID, messageID);
+      // Send response with the question and username
+      const userQuestion = target.join(" ");
+      api.editMessage(`Question asked by ${username}: ${userQuestion}\n\nAnswer: ${result}`, lad.messageID, event.threadID, messageID);
 
       global.client.onReply.push({
         name: this.name,
