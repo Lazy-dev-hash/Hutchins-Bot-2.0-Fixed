@@ -79,19 +79,15 @@ module.exports = {
       const response = await retryWithBackoff(() => axios.get(followUpApiUrl));
       const followUpResult = convertToBold(response.data.response);
       api.setMessageReaction("✅", event.messageID, () => {}, true);
-      api.sendMessage(`${followUpResult}`, threadID, event.messageID);
+      api.sendMessage(`${followUpResult}\n\nQuestion asked by: ${event.senderID}`, threadID, event.messageID);
     } catch (error) {
       api.sendMessage(`Error: ${error.message}`, threadID);
     }
   },
 
   onLaunch: async function ({ event, actions, target, api }) {
-    const { messageID, threadID, senderID } = event;
-    const id = senderID;
-
-    // Get username or display name (if available)
-    const userProfile = await api.getUserInfo(senderID);
-    const username = userProfile[senderID]?.name || 'User';  // If no name, fallback to 'User'
+    const { messageID, threadID } = event;
+    const id = event.senderID;
 
     if (!target[0]) {
       return api.sendMessage("Please provide your question.\n\nExample: ai what is the solar system?", threadID, messageID);
@@ -110,9 +106,7 @@ module.exports = {
 
       const result = convertToBold(response.response.text());
 
-      // Send response with the question and username
-      const userQuestion = target.join(" ");
-      api.editMessage(`Question asked by ${username}: ${userQuestion}\n\nAnswer: ${result}`, lad.messageID, event.threadID, messageID);
+      api.editMessage(`${result}\n\nQuestion asked by: ${event.senderID}`, lad.messageID, event.threadID, messageID);
 
       global.client.onReply.push({
         name: this.name,
